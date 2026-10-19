@@ -584,303 +584,113 @@ function prosesNilai() {
 ```
 ---
 
-## F. Eksperimen Mandiri
+<h3>G. Eksperimen Mandiri</h3>
 
-### Eksperimen 1 — Meminta Dua Nilai dari Prompt
+<!-- Eksperimen 1: Dua bilangan -->
+<h4>1. Operasi Dua Bilangan</h4>
+<button type="button" onclick="operasiDariPrompt()">Hitung Dua Bilangan</button>
 
-**Tujuan:** Mengubah Latihan 3 agar menerima dua nilai melalui `prompt()` dan mengonversinya menjadi `number`.
+<!-- Eksperimen 7: Tabel perkalian -->
+<h4>7. Tabel Perkalian 7</h4>
+<button type="button" onclick="tabelPerkalian()">Tampilkan Tabel Perkalian</button>
+<pre id="hasilPerkalian"></pre>
 
-**Kode HTML (`index.html`):**
+<!-- Eksperimen 8: Function cekGenap -->
+<h4>8. Fungsi Cek Bilangan Genap</h4>
+<input type="number" id="angkaGenap" step="1">
+<button type="button" onclick="ujiCekGenap()">Periksa</button>
+<p id="hasilGenap"></p>
 
-```html
-<h2>Eksperimen Mandiri 1</h2>
-<p>Masukkan dua bilangan melalui kotak dialog.</p>
-```
+<!-- Eksperimen 10: Tambahan menu -->
+<h4>10. Tambahan Menu Makanan</h4>
+<label><input type="checkbox" class="menu" value="5000"> Nasi putih — Rp5.000</label><br>
+<label><input type="checkbox" class="menu" value="2000"> Tahu goreng — Rp2.000</label><br>
 
-**Kode JavaScript (`script.js`):**
+<!-- Eksperimen 11: Sembunyikan/tampilkan -->
+<h4>11. Menyembunyikan dan Menampilkan HTML</h4>
+<button type="button" onclick="ubahTampilan()">Sembunyikan / Tampilkan Pesan</button>
+<p id="pesanEksperimen">Ini adalah teks untuk eksperimen HTML.</p>
 
-Gunakan function `operasiDasar()` dari Latihan 3, kemudian ganti pemanggilan tetap `operasiDasar(9, 4)` dengan kode berikut.
-
-```javascript
-const inputA = prompt("Masukkan bilangan pertama:");
-const inputB = prompt("Masukkan bilangan kedua:");
-
-if (
-    inputA === null || inputB === null ||
-    inputA.trim() === "" || inputB.trim() === ""
-) {
-    alert("Kedua bilangan harus diisi.");
-} else {
-    const a = Number(inputA);
-    const b = Number(inputB);
-
-    if (!Number.isFinite(a) || !Number.isFinite(b)) {
-        alert("Masukkan angka yang valid.");
-    } else {
-        operasiDasar(a, b);
-    }
+// 1. Operasi dua bilangan dari prompt
+function operasiDariPrompt() {
+    const inputA = prompt("Masukkan bilangan pertama:");
+    const inputB = prompt("Masukkan bilangan kedua:");
+    if (inputA === null || inputB === null) return;
+    operasiDasar(Number(inputA), Number(inputB));
+    alert("Hasil perhitungan sudah ditampilkan di Console.");
 }
-```
 
-**Langkah kerja:**
-
-1. Masukkan bilangan pertama.
-2. Masukkan bilangan kedua.
-3. Periksa hasil operasi pada Console.
-
-**Hasil yang diharapkan:**
-
-Program melakukan operasi aritmetika berdasarkan dua nilai yang dimasukkan pengguna.
-
-
----
-
-### Eksperimen 7 — Tabel Perkalian Angka 7
-
-**Tujuan:** Menggunakan perulangan untuk menampilkan tabel perkalian angka 7 dari 1 sampai 10.
-
-**Kode HTML (`index.html`):**
-
-```html
-<h2>Eksperimen 7 — Tabel Perkalian 7</h2>
-
-<button type="button" onclick="tampilkanPerkalian7()">
-    Tampilkan Tabel
-</button>
-
-<p id="hasilPerkalian7"></p>
-```
-
-**Kode JavaScript (`script.js`):**
-
-```javascript
-function tampilkanPerkalian7() {
-    let tabel = "";
-
+// 7. Tabel perkalian 7
+function tabelPerkalian() {
+    let hasil = "";
     for (let i = 1; i <= 10; i++) {
-        tabel += "7 × " + i + " = " + (7 * i) + "<br>";
+        hasil += "7 x " + i + " = " + (7 * i) + "\n";
     }
-
-    document.getElementById("hasilPerkalian7").innerHTML = tabel;
+    document.getElementById("hasilPerkalian").textContent = hasil;
 }
-```
 
-**Langkah kerja:**
-
-1. Jalankan halaman.
-2. Klik tombol Tampilkan Tabel.
-3. Periksa hasil perkalian dari 1 sampai 10.
-
-**Hasil yang diharapkan:**
-
-Tabel perkalian angka 7 tampil pada halaman HTML.
-
----
-
-### Eksperimen 8 — Function `cekGenap(angka)`
-
-**Tujuan:** Membuat function yang mengembalikan `true` jika angka genap.
-
-**Kode HTML (`index.html`):**
-
-```html
-<h2>Eksperimen 8 — Cek Bilangan Genap</h2>
-
-<input
-    type="number"
-    id="cekGenapInput"
-    step="1"
-    placeholder="Masukkan bilangan bulat"
->
-
-<button type="button" onclick="tampilkanCekGenap()">
-    Periksa
-</button>
-
-<p id="hasilCekGenap"></p>
-```
-
-**Kode JavaScript (`script.js`):**
-
-```javascript
+// 8. Cek genap
 function cekGenap(angka) {
-    return angka % 2 === 0;
+    return Number.isInteger(angka) && angka % 2 === 0;
 }
 
-function tampilkanCekGenap() {
-    const input = document.getElementById("cekGenapInput").value;
-    const hasil = document.getElementById("hasilCekGenap");
-
-    if (input.trim() === "" || !Number.isInteger(Number(input))) {
-        hasil.textContent = "Masukkan bilangan bulat yang valid.";
-        return;
-    }
-
-    const angka = Number(input);
-
-    hasil.textContent = cekGenap(angka)
-        ? angka + " adalah bilangan genap (true)."
-        : angka + " bukan bilangan genap (false).";
+// 11. Menyembunyikan atau menampilkan teks
+function ubahTampilan() {
+    const pesan = document.getElementById("pesanEksperimen");
+    pesan.style.display = pesan.style.display === "none" ? "block" : "none";
 }
-```
 
-**Langkah kerja:**
+# Praktikum JavaScript — Bagian Eksperimen Mandiri
 
-1. Masukkan angka 10 dan klik Periksa.
-2. Masukkan angka 7 dan klik Periksa.
-3. Periksa hasil yang muncul.
-
-**Hasil yang diharapkan:**
-
-Angka 10 menghasilkan `true`, sedangkan angka 7 menghasilkan `false`.
+Dokumentasi ini berisi penjelasan mengenai bagian **G. Eksperimen Mandiri** dari proyek Praktikum JavaScript yang dikembangkan di dalam lingkungan Visual Studio Code.
 
 ---
 
-### Eksperimen 9 — Validasi Form Nama dan Nilai
+## Daftar Eksperimen Mandiri
 
-**Tujuan:** Memastikan nama tidak kosong dan nilai berada pada rentang 0–100.
+Berikut adalah rincian fitur dan eksperimen mandiri yang diimplementasikan pada berkas `index.html` dan `script.js`:
 
-**Kode HTML (`index.html`):**
+* **1. Operasi Dua Bilangan**: Mengambil dua bilangan melalui `prompt`, menjalankan fungsi operasi dasar matematika[cite: 2], dan menampilkan hasilnya langsung ke Console[cite: 2].
+* **7. Tabel Perkalian 7**: Menghasilkan daftar perkalian angka 7 dari 1 hingga 10[cite: 2] dan menampilkannya pada elemen `<pre>` di halaman web.
+* **8. Fungsi Cek Bilangan Genap**: Memeriksa apakah suatu angka merupakan bilangan genap atau ganjil[cite: 2] menggunakan fungsi kustom `cekGenap(angka)`[cite: 2].
+* **9. Validasi Form Nilai**: Memastikan kolom input tugas, UTS, dan UAS terisi dengan benar[cite: 1, 2] serta berada pada rentang nilai valid 0–100[cite: 2].
+* **10. Tambahan Menu Makanan**: Menambahkan pilihan item menu baru seperti Nasi putih dan Tahu goreng yang terhubung secara otomatis dengan fungsi kalkulator total harga menggunakan kelas `.menu`[cite: 2].
+* **11. Menyembunyikan dan Menampilkan HTML**: Fitur interaktif untuk mengubah status visibilitas elemen teks `#pesanEksperimen`[cite: 1] menjadi tersembunyi atau muncul kembali[cite: 2].
+
+---
+
+## Cuplikan Kode Program
+
+### 1. Struktur HTML (`index.html`)
+Bagian antarmuka untuk fitur-fitur Eksperimen Mandiri[cite: 1]:
 
 ```html
-<h2>Eksperimen 9 — Validasi Form</h2>
+<h3>G. Eksperimen Mandiri</h3>
 
-<label for="namaValidasi">Nama:</label>
-<input type="text" id="namaValidasi">
-<br><br>
+<!-- Eksperimen 1: Dua bilangan -->
+<h4>1. Operasi Dua Bilangan</h4>
+<button type="button" onclick="operasiDariPrompt()">Hitung Dua Bilangan</button>
 
-<label for="nilaiValidasi">Nilai (0–100):</label>
-<input type="number" id="nilaiValidasi" min="0" max="100">
-<br><br>
+<!-- Eksperimen 7: Tabel perkalian -->
+<h4>7. Tabel Perkalian 7</h4>
+<button type="button" onclick="tabelPerkalian()">Tampilkan Tabel Perkalian</button>
+<pre id="hasilPerkalian"></pre>
 
-<button type="button" onclick="validasiFormMandiri()">
-    Validasi
-</button>
+<!-- Eksperimen 8: Function cekGenap -->
+<h4>8. Fungsi Cek Bilangan Genap</h4>
+<input type="number" id="angkaGenap" step="1">
+<button type="button" onclick="ujiCekGenap()">Periksa</button>
+<p id="hasilGenap"></p>
 
-<p id="hasilValidasiForm"></p>
-```
+<!-- Eksperimen 10: Tambahan menu -->
+<h4>10. Tambahan Menu Makanan</h4>
+<label><input type="checkbox" class="menu" value="5000"> Nasi putih — Rp5.000</label><br>
+<label><input type="checkbox" class="menu" value="2000"> Tahu goreng — Rp2.000</label><br>
 
-**Kode JavaScript (`script.js`):**
-
-```javascript
-function validasiFormMandiri() {
-    const nama = document.getElementById("namaValidasi").value.trim();
-    const inputNilai = document.getElementById("nilaiValidasi").value;
-    const hasil = document.getElementById("hasilValidasiForm");
-
-    if (nama === "") {
-        hasil.textContent = "Nama tidak boleh kosong.";
-        return;
-    }
-
-    if (inputNilai.trim() === "") {
-        hasil.textContent = "Nilai tidak boleh kosong.";
-        return;
-    }
-
-    const nilai = Number(inputNilai);
-
-    if (!Number.isFinite(nilai) || nilai < 0 || nilai > 100) {
-        hasil.textContent = "Nilai harus berada pada rentang 0–100.";
-        return;
-    }
-
-    hasil.textContent =
-        "Data valid. Nama: " + nama + ", nilai: " + nilai + ".";
-}
-```
-
-**Langkah kerja:**
-
-1. Isi nama dan nilai dengan benar.
-2. Uji nama kosong.
-3. Uji nilai kosong.
-4. Uji nilai di luar rentang 0–100.
-
-**Hasil yang diharapkan:**
-
-Program menampilkan pesan kesalahan jika input tidak sesuai dan pesan data valid jika seluruh input memenuhi ketentuan.
-
----
-
-### Eksperimen 10 — Menambah Dua Pilihan Menu
-
-**Tujuan:** Menambah minimal dua pilihan menu dan harga pada Latihan 8.
-
-**Kode HTML (`index.html`):**
-
-Tambahkan dua checkbox berikut pada bagian daftar menu Latihan 8.
-
-```html
-<label>
-    <input type="checkbox" class="menu" value="3000">
-    Es Teh — Rp3.000
-</label>
-<br>
-
-<label>
-    <input type="checkbox" class="menu" value="7000">
-    Mie Goreng — Rp7.000
-</label>
-<br>
-```
-
-**Kode JavaScript (`script.js`):**
-
-Gunakan kembali kode `daftarMenu` dan `hitungTotal()` dari Latihan 8. Tidak perlu membuat function baru jika kode Latihan 8 sudah tersedia.
-
-**Langkah kerja:**
-
-1. Tambahkan menu Es Teh dan Mie Goreng.
-2. Pastikan kedua input memiliki class `menu`.
-3. Jalankan halaman dan centang menu tambahan.
-4. Periksa perubahan total harga.
-
-**Hasil yang diharapkan:**
-
-Es Teh menambah Rp3.000 dan Mie Goreng menambah Rp7.000 pada total harga.
-
----
-
-### Eksperimen 11 — Menyembunyikan dan Menampilkan Elemen HTML
-
-**Tujuan:** Menggunakan tombol untuk menyembunyikan atau menampilkan elemen HTML.
-
-**Kode HTML (`index.html`):**
-
-```html
-<h2>Eksperimen 11 — Toggle Elemen HTML</h2>
-
-<p id="teksToggle">
-    Ini adalah teks yang bisa disembunyikan.
-</p>
-
-<button type="button" onclick="toggleTeks()">
-    Tampilkan / Sembunyikan
-</button>
-```
-
-**Kode JavaScript (`script.js`):**
-
-```javascript
-function toggleTeks() {
-    const teks = document.getElementById("teksToggle");
-    teks.hidden = !teks.hidden;
-}
-```
-
-**Langkah kerja:**
-
-1. Jalankan halaman.
-2. Klik tombol Tampilkan / Sembunyikan.
-3. Klik kembali tombol untuk memunculkan teks.
-4. Amati perubahan tampilan.
-
-**Hasil yang diharapkan:**
-
-Teks akan bergantian tersembunyi dan terlihat setiap kali tombol ditekan.
-
----
+<!-- Eksperimen 11: Sembunyikan/tampilkan -->
+<h4>11. Menyembunyikan dan Menampilkan HTML</h4>
+<button type="button" onclick="ubahTampilan()">Sembunyikan / Tampilkan Pesan</button>
+<p id="pesanEksperimen">Ini adalah teks untuk eksperimen HTML.</p>
 
 ## J. Kesimpulan
 
